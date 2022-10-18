@@ -26,4 +26,7 @@ int main()
 	vector<int> vect{ 2, 7, 11, 15 };
 	twoSum(vect, 9);
 }
-
+/*
+#1 For loop and find the remainder
+#2 
+*/
