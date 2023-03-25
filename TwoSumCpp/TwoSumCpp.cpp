@@ -3,28 +3,21 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-vector<int> twoSum(vector<int>& nums, int target) {
-	int skip = 0;
+vector<int> twoSum(const vector<int>& nums, int target) {
+	unordered_map<int, int> vals;
 	for (int i = 0; i < nums.size(); i++) {
-		auto current = nums[i];
-		auto remainder = target - current;
-		auto result = find(nums.begin() + i + 1, nums.end(), remainder);
-		if (result != nums.end())
-		{
-			int index2 = result - nums.begin();
-			return  vector<int>{ i + skip, index2 + skip };
+		const int remainder = target - nums[i];
+		auto index = vals.find(remainder);
+		if (index != vals.end()) {
+			return { i, index->second };
 		}
-		else {
-			// Remove the item from start
-			nums.erase(nums.begin());
-			skip++;
-			i--;
-		}
+		vals[nums[i]] = i;
 	}
-	return vector<int>{};
+	return {};
 }
 
 int main()
